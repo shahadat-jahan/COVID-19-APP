@@ -54,3 +54,16 @@ function report()
     }
     $conn->close();
 }
+
+function get_symptoms($step)
+{
+    global $conn;
+    $sql = "SELECT * FROM symptoms WHERE  display_in = '$step' ORDER BY symptom ASC";
+    $result = $conn->query($sql);
+    if ($result->num_rows > 0) {
+        return $result;
+    } else {
+        return false;
+    }
+    $conn->close();
+}

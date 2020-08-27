@@ -19,6 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 require("header.php");
+$symptoms = get_symptoms('step2');
 ?>
 
 
@@ -27,44 +28,23 @@ require("header.php");
         <div class="p-3 mb-2 bg-light text-dark">
             <h2>Please select additional symptoms from following</h2>
             <div class="form-group">
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="additional_symptoms[]" value="yes">
-                    <label class="form-check-label">Abdominal pain</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="additional_symptoms[]" value="yes">
-                    <label class="form-check-label">Vomiting</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="additional_symptoms[]" value="yes">
-                    <label class="form-check-label">Diarrhoea</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="additional_symptoms[]" value="yes">
-                    <label class="form-check-label">Chest pain or pressure</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="additional_symptoms[]" value="yes">
-                    <label class="form-check-label">Muscle pain</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="additional_symptoms[]" value="yes">
-                    <label class="form-check-label">Loss of taste or smell</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="additional_symptoms[]" value="yes">
-                    <label class="form-check-label">Rash on skin or Discoloration of fingers or toes</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="additional_symptoms[]" value="yes">
-                    <label class="form-check-label">Loss of speech or movement</label>
-                </div>
+                <?php
+                while ($row = $symptoms->fetch_assoc()) {
+
+                ?>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="additional_symptoms[]" value="yes">
+                        <label class="form-check-label"><?php echo $row['symptom']; ?></label>
+                    </div>
+                <?php
+                }
+                ?>
+
+
+                <button type="submit" class="btn btn-primary">Finish</button>
+
             </div>
-
-            <button type="submit" class="btn btn-primary">Finish</button>
-
         </div>
-    </div>
 </form>
 
 <?php require_once("footer.php"); ?>

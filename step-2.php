@@ -15,6 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     exit;
 }
 require("header.php");
+$symptoms = get_symptoms('step1');
 ?>
 
 <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
@@ -22,26 +23,14 @@ require("header.php");
         <div class="p-3 mb-2 bg-light text-dark">
             <h2>Please select symptoms following</h2>
             <div class="form-group">
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="symptoms[]" value="yes">
-                    <label class="form-check-label">Breathing problem</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="symptoms[]" value="yes">
-                    <label class="form-check-label">Dry cough</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="symptoms[]" value="yes">
-                    <label class="form-check-label">Sore throat</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="symptoms[]" value="yes">
-                    <label class="form-check-label">Weakness</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="symptoms[]" value="yes">
-                    <label class="form-check-label">Runny nose</label>
-                </div>
+                <?php while ($row = $symptoms->fetch_assoc()) {
+                    // print_r($row);
+                ?>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="symptoms[]" value="yes">
+                        <label class="form-check-label"><?php echo $row['symptom']; ?></label>
+                    </div>
+                <?php } ?>
             </div>
             <button type="submit" class="btn btn-primary">Next</button>
 
