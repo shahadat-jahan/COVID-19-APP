@@ -1,6 +1,6 @@
 <?php
 require("database.php");
-
+require("header.php");
 if (empty($_SESSION['user_id'])) {
     header('location: ' . $site_url);
     exit;
@@ -18,7 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit;
     }
 }
-require("header.php");
+
 $symptoms = get_symptoms('step2');
 ?>
 

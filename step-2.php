@@ -1,8 +1,9 @@
 <?php
 require("database.php");
-$_SESSION['user_id'];
+require("header.php");
 if (empty($_SESSION['user_id'])) {
     header('location: ' . $site_url);
+    exit;
 }
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (count($_POST["symptoms"]) > 0) {
@@ -14,7 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     header('location: ' . $site_url . 'step-3.php');
     exit;
 }
-require("header.php");
+
 $symptoms = get_symptoms('step1');
 ?>
 

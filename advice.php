@@ -1,13 +1,13 @@
 <?php
 require("database.php");
-
+require("header.php");
 if (empty($_SESSION['user_id'])) {
     header('location: ' . $site_url);
     exit;
 }
 $total_score = $_SESSION['score'];
 
-require("header.php");
+
 $contact_info = "<br>In case of any emergency to contact this numbers:
     <ul>
         <li>16263 (Bangladesh Department of Health)</li>
