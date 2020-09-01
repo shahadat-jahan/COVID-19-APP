@@ -1,5 +1,5 @@
 <?php
-require("database.php");
+
 require("header.php");
 if (empty($_SESSION['user_id'])) {
     header('location: ' . $site_url);

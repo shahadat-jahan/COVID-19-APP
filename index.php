@@ -1,5 +1,5 @@
 <?php
-require("database.php");
+require("header.php");
 
 $nameErr = $ageErr = $sexErr = $tempErr = "";
 $name = $age = $sex = $temp = "";
@@ -59,7 +59,7 @@ function test_input($data)
     $data = htmlspecialchars($data);
     return $data;
 }
-require("header.php");
+
 ?>
 
 

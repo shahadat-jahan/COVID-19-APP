@@ -1,21 +1,18 @@
 <?php
-require("database.php");
+require("header.php");
 
 if (empty($_SESSION['admin_id'])) {
-    header('location: ' . $site_url . ' admin_login.php');
+    header('location: ' . $site_url . 'admin_login.php');
     exit;
 }
-require("header.php");
 ?>
 
-
 <div class="p-3 mb-2 bg-light text-dark">
-
     <div class="row">
-        <div class="col-1">
-            <a class="btn btn-primary" href="logout.php" role="button">Logout</a>
+        <div class="col-3">
+            <?php require("nav.php"); ?>
         </div>
-        <div class="col-11">
+        <div class="col-9">
             <?php
             $result = report();
 
@@ -37,7 +34,6 @@ require("header.php");
             echo '</tbody></table></div>';
             ?>
         </div>
-        </>
     </div>
-
-    <?php require_once("footer.php"); ?>
+</div>
+<?php require_once("footer.php"); ?>

@@ -1,8 +1,8 @@
 <?php
-require("database.php");
+require("header.php");
 $errmsg = "";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $admin_info = login($_POST["name"], $_POST["pass"]);
+    $admin_info = login($_POST["name"], $_POST["password"]);
     if (!empty($admin_info["id"]) && $admin_info["id"] > 0) {
         $_SESSION["admin_id"] = $admin_info["id"];
 
@@ -11,7 +11,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $errmsg = "Username or Password wrong!";
     }
 }
-require("header.php");
+
 ?>
 <form method="post" action="admin_login.php">
     <div class="form-group">
@@ -31,7 +31,7 @@ require("header.php");
             <div class="form-group form-row">
                 <div class="col-auto">
                     <label><b>Password: </b></label>
-                    <input class="form-control" type="password" name="pass">
+                    <input class="form-control" type="password" name="password">
                 </div>
             </div>
             <button type="submit" class="btn btn-primary">Login</button>

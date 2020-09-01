@@ -55,6 +55,68 @@ function report()
     $conn->close();
 }
 
+function avg_age()
+{
+    global $conn;
+    $sql = "SELECT AVG(age) AS average_age FROM survey";
+
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_array(MYSQLI_ASSOC);
+        return $row["average_age"];
+    } else {
+        return false;
+    }
+    $conn->close();
+}
+
+function total_sex($sex)
+{
+    global $conn;
+    $sql = "SELECT COUNT(sex) AS total_sex FROM survey WHERE sex= '$sex'";
+
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_array(MYSQLI_ASSOC);
+        return $row["total_sex"];
+    } else {
+        return false;
+    }
+    $conn->close();
+}
+
+function total_negative()
+{
+    global $conn;
+    $sql = "SELECT COUNT(score) AS total_negative FROM survey WHERE score < 5";
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_array(MYSQLI_ASSOC);
+        return $row["total_negative"];
+    } else {
+        return false;
+    }
+    $conn->close();
+}
+
+function total_positive()
+{
+    global $conn;
+    $sql = "SELECT COUNT(score) AS total_positive FROM survey WHERE score >= 5";
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_array(MYSQLI_ASSOC);
+        return $row["total_positive"];
+    } else {
+        return false;
+    }
+    $conn->close();
+}
+
 function get_symptoms($step)
 {
     global $conn;
@@ -68,11 +130,11 @@ function get_symptoms($step)
     $conn->close();
 }
 
-function login($name, $pass)
+function login($name, $password)
 {
     global $conn;
 
-    $sql = "SELECT * FROM users WHERE name='" . $name . "' AND pass='" . $pass . "' limit 1";
+    $sql = "SELECT id FROM users WHERE name='" . $name . "' AND password='" . md5($password) . "' limit 1";
     $result = $conn->query($sql);
     if ($result) {
         return $result->fetch_array();

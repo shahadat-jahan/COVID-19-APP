@@ -1,3 +1,24 @@
 footer {
   padding: 5px;
 }
+.btn2 {
+  margin: 10px 0;
+  display: block !important;
+  /* width: 100%; */
+}
+
+* {
+  box-sizing: border-box;
+}
+.box {
+  border: 1px solid rgb(145, 142, 142);
+  float: left;
+  width: 33.33%;
+  padding: 50px;
+  text-align: center;
+}
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
