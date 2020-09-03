@@ -28,7 +28,7 @@ if (empty($_SESSION['admin_id'])) {
                 }
 
                 echo '<tr><th scope="row">' . $row['id'] . '</th><td>' . $row['name'] . '</td><td>' . $row['age'] . '</td><td>' . $row['sex'] . '</td>
-            <td>' . $row['temp'] . '</td><td>' . (date("Y-m-d", $row['date'])) . '</td><td>' . $row['score'] . '</td>
+            <td>' . $row['temp'] . '</td><td>' . $row['date'] . '</td><td>' . $row['score'] . '</td>
             <td>' . $report . '</td></tr>';
             }
             echo '</tbody></table></div>';

@@ -116,7 +116,18 @@ function total_positive()
     }
     $conn->close();
 }
-
+function get_total_affected($year)
+{
+    global $conn;
+    $sql = "SELECT count(*) as total, month(date) as month, year(date) as year FROM `survey` where year(date) = '$year' group by year,month ORDER BY year desc, `month` ASC";
+    $result = $conn->query($sql);
+    if ($result->num_rows > 0) {
+        return $result;
+    } else {
+        return false;
+    }
+    $conn->close();
+}
 function get_symptoms($step)
 {
     global $conn;

@@ -17,13 +17,13 @@ if (empty($_SESSION['admin_id'])) {
             <h2>Reports</h2>
             <div class="clearfix">
                 <div class="box">
-                    <a class="btn btn-primary " href="report-age.php" role="button">Reports by age</a>
+                    <a href="report-age.php" role="button">Reports by age</a>
                 </div>
                 <div class="box">
-                    <a class="btn btn-primary " href="report-date.php" role="button">Reports by date</a>
+                    <a href="report-result.php" role="button">Reports by result</a>
                 </div>
                 <div class="box">
-                    <a class="btn btn-primary " href="report-result.php" role="button">Reports by result</a>
+                    <a href="report-date.php" role="button">Reports by date</a>
                 </div>
             </div>
         </div>

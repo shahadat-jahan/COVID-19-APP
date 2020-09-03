@@ -14,18 +14,18 @@ if (empty($_SESSION['admin_id'])) {
         </div>
         <div class="col-9">
             <?php
-            $negative = total_negative();
             $positive = total_positive();
-
-
-            echo '<div class="table-responsive"><h2>Reports by result</h2><table class="table" ><thead class="thead-dark"><tr>
-            <th scope="col">Total positive</th><th>Total negative</th></tr></thead><tbody>';
-
-
-            echo '<tr><td>' . $positive . '</td><td>' . $negative . '</td></tr>';
-
-            echo '</tbody></table></div>';
+            $negative = total_negative();
             ?>
+            <h2>Reports by result</h2>
+            <div class="clearfix">
+                <div class="box" style="background-color:#ddd">
+                    <p><b>Total positive:</b> <?php echo $positive; ?></p>
+                </div>
+                <div class="box" style="background-color:#ddd">
+                    <p><b>Total negative:</b> <?php echo $negative; ?></p>
+                </div>
+            </div>
         </div>
     </div>
 </div>
