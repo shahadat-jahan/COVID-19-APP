@@ -17,11 +17,15 @@ if (empty($_SESSION['admin_id'])) {
             $average_age = avg_age();
             $total_male = total_sex("male");
             $total_female = total_sex("female");
+            $average_age_male = avg_age_total_sex("male");
+            $average_age_female = avg_age_total_sex("female");
             ?>
             <h2>Reports by age</h2>
             <div class="clearfix">
                 <div class="box" style="background-color:#ddd">
                     <p><b>Average age:</b> <?php echo ceil($average_age); ?></p>
+                    <p><b>Average age male:</b> <?php echo ceil($average_age_male); ?></p>
+                    <p><b>Average age female:</b> <?php echo ceil($average_age_female); ?></p>
                 </div>
                 <div class="box" style="background-color:#ddd">
                     <p><b>Total male:</b> <?php echo $total_male; ?></p>

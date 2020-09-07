@@ -12,12 +12,12 @@ if ($conn->connect_error) {
     die("connection failed:" . $conn->connect_error);
 }
 
-function save_user($name, $age, $sex, $temp)
+function save_user($name, $age, $sex, $temp, $house, $road, $thana, $district)
 {
     global $conn;
 
-    $sql = "INSERT INTO survey (name, age, sex, temp)
-       VALUE ('$name', '$age', '$sex', '$temp')";
+    $sql = "INSERT INTO survey (name, age, sex, temp, house, road, thana, district)
+       VALUE ('$name', '$age', '$sex', '$temp', '$house', '$road', '$thana', '$district')";
 
     if ($conn->query($sql) === TRUE) {
         return $conn->insert_id;
@@ -31,7 +31,7 @@ function update_result($id, $total_score)
 {
     global $conn;
 
-    $sql = "UPDATE survey SET score='$total_score', date=" . time() . " WHERE id=" . $id;
+    $sql = "UPDATE survey SET score='$total_score'  WHERE id=" . $id;
     if ($conn->query($sql) === TRUE) {
         return true;
     } else {
@@ -71,6 +71,22 @@ function avg_age()
     $conn->close();
 }
 
+function avg_age_total_sex($sex)
+{
+    global $conn;
+    $sql = "SELECT AVG(age) AS average_age FROM survey WHERE sex= '$sex'";
+
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_array(MYSQLI_ASSOC);
+        return $row["average_age"];
+    } else {
+        return false;
+    }
+    $conn->close();
+}
+
 function total_sex($sex)
 {
     global $conn;
@@ -81,6 +97,21 @@ function total_sex($sex)
     if ($result->num_rows > 0) {
         $row = $result->fetch_array(MYSQLI_ASSOC);
         return $row["total_sex"];
+    } else {
+        return false;
+    }
+    $conn->close();
+}
+
+function total_positive()
+{
+    global $conn;
+    $sql = "SELECT COUNT(score) AS total_positive FROM survey WHERE score >= 5";
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_array(MYSQLI_ASSOC);
+        return $row["total_positive"];
     } else {
         return false;
     }
@@ -102,10 +133,10 @@ function total_negative()
     $conn->close();
 }
 
-function total_positive()
+function total_positive_sex($sex)
 {
     global $conn;
-    $sql = "SELECT COUNT(score) AS total_positive FROM survey WHERE score >= 5";
+    $sql = "SELECT COUNT(score) AS total_positive FROM survey WHERE sex = '$sex' AND score >= 5";
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
@@ -116,6 +147,22 @@ function total_positive()
     }
     $conn->close();
 }
+
+function total_negative_sex($sex)
+{
+    global $conn;
+    $sql = "SELECT COUNT(score) AS total_negative FROM survey WHERE sex = '$sex' AND score < 5";
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_array(MYSQLI_ASSOC);
+        return $row["total_negative"];
+    } else {
+        return false;
+    }
+    $conn->close();
+}
+
 function get_total_affected($year)
 {
     global $conn;
@@ -128,6 +175,20 @@ function get_total_affected($year)
     }
     $conn->close();
 }
+
+function total_affected_zone()
+{
+    global $conn;
+    $sql = "SELECT count(*) as total, district as district FROM `survey` group by district ORDER BY district ASC";
+    $result = $conn->query($sql);
+    if ($result->num_rows > 0) {
+        return $result;
+    } else {
+        return false;
+    }
+    $conn->close();
+}
+
 function get_symptoms($step)
 {
     global $conn;
@@ -139,6 +200,38 @@ function get_symptoms($step)
         return false;
     }
     $conn->close();
+}
+
+function get_districts()
+{
+    global $conn;
+    $sql = "SELECT * FROM district ORDER BY name ASC ";
+    $result = $conn->query($sql);
+    if ($result->num_rows > 0) {
+        return $result;
+    } else {
+        return false;
+    }
+    $conn->close();
+}
+
+function writeOptionList($table, $id, $fld)
+{
+    global $conn;
+    $sql = "SELECT * FROM $table ORDER BY $fld ASC";
+    $result = $conn->query($sql);
+    if (!$result) {
+        echo "failed to open $table<p>";
+        return false;
+    }
+    //If data exist
+    while ($a_row = $result->fetch_assoc()) {
+        if ($id == $a_row["id"])
+            $selected = "SELECTED";
+        else
+            $selected = "";
+        echo "<option $selected value='" . $a_row["id"] . "'>" . $a_row[$fld] . "</option>";
+    }
 }
 
 function login($name, $password)
