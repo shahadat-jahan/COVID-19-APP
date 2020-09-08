@@ -134,7 +134,7 @@ function test_input($data)
             <div class="form-group form-row">
                 <div class="col-auto">
                     <label><b>Address: </b></label>
-                    <input class="form-control address" type="text" name="house" placeholder="House">
+                    <input class="form-control address" type="text" name="house" placeholder="House NO.">
                     <span class="text-danger"><?php echo $houseErr; ?></span>
                     <input class="form-control address" type="text" name="road" placeholder="Road/Area">
                     <span class="text-danger"><?php echo $roadErr; ?></span>
@@ -143,11 +143,13 @@ function test_input($data)
                     <select class="form-control" name="district" id="exampleFormControlSelect1">
                         <option value="0">-Please select district-</option>
                         <?php
-                        $result = get_districts();
-                        while ($row = $result->fetch_assoc()) {
-                            $district = $row["name"];
-                            echo '<option value=" ' . $district . '"  >' . $district . '</option>';
-                        } ?>
+                        // $result = get_districts();
+                        // while ($row = $result->fetch_assoc()) {
+                        //     $district = $row["name"];
+                        //     echo '<option value=" ' . $district . '"  >' . $district . '</option>';
+                        // } 
+                        writeOptionList("district", $district_id, 'name')
+                        ?>
                     </select>
 
                     <span class="text-danger"><?php echo $districtErr; ?></span>

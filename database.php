@@ -179,7 +179,7 @@ function get_total_affected($year)
 function total_affected_zone()
 {
     global $conn;
-    $sql = "SELECT count(*) as total, district as district FROM `survey` group by district ORDER BY district ASC";
+    $sql = "SELECT count(*) as total, district as district FROM `survey` group by district ORDER BY total DESC";
     $result = $conn->query($sql);
     if ($result->num_rows > 0) {
         return $result;

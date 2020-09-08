@@ -23,12 +23,12 @@ if (empty($_SESSION['admin_id'])) {
             ?>
             <h2>Reports by result</h2>
             <div class="clearfix">
-                <div class="box" style="background-color:#ddd">
+                <div class="box2" style="background-color:#ddd">
                     <p><b>Total positive:</b> <?php echo $positive; ?></p>
                     <p><b>Total positive male:</b> <?php echo $positive_male; ?></p>
                     <p><b>Total positive female:</b> <?php echo $positive_female; ?></p>
                 </div>
-                <div class="box" style="background-color:#ddd">
+                <div class="box2" style="background-color:#ddd">
                     <p><b>Total negative:</b> <?php echo $negative; ?></p>
                     <p><b>Total negative male:</b> <?php echo $negative_male; ?></p>
                     <p><b>Total negative female:</b> <?php echo $negative_female; ?></p>

@@ -9,14 +9,24 @@ footer {
 .address {
   margin-bottom: 10px;
 }
-
-* {
-  box-sizing: border-box;
+.box2 {
+  border: 1px solid rgb(145, 142, 142);
+  float: left;
+  width: 50%;
+  padding: 50px;
+  text-align: center;
 }
-.box {
+.box3 {
   border: 1px solid rgb(145, 142, 142);
   float: left;
   width: 33.33%;
+  padding: 50px;
+  text-align: center;
+}
+.box4 {
+  border: 1px solid rgb(145, 142, 142);
+  float: left;
+  width: 25%;
   padding: 50px;
   text-align: center;
 }

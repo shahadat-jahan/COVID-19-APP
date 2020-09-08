@@ -22,15 +22,15 @@ if (empty($_SESSION['admin_id'])) {
             ?>
             <h2>Reports by age</h2>
             <div class="clearfix">
-                <div class="box" style="background-color:#ddd">
+                <div class="box3" style="background-color:#ddd">
                     <p><b>Average age:</b> <?php echo ceil($average_age); ?></p>
                     <p><b>Average age male:</b> <?php echo ceil($average_age_male); ?></p>
                     <p><b>Average age female:</b> <?php echo ceil($average_age_female); ?></p>
                 </div>
-                <div class="box" style="background-color:#ddd">
+                <div class="box3" style="background-color:#ddd">
                     <p><b>Total male:</b> <?php echo $total_male; ?></p>
                 </div>
-                <div class="box" style="background-color:#ddd">
+                <div class="box3" style="background-color:#ddd">
                     <p><b>Total female:</b> <?php echo $total_female; ?></p>
                 </div>
             </div>
