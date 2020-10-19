@@ -143,12 +143,12 @@ function test_input($data)
                     <select class="form-control" name="district" id="exampleFormControlSelect1">
                         <option value="0">-Please select district-</option>
                         <?php
-                        // $result = get_districts();
-                        // while ($row = $result->fetch_assoc()) {
-                        //     $district = $row["name"];
-                        //     echo '<option value=" ' . $district . '"  >' . $district . '</option>';
-                        // } 
-                        writeOptionList("district", $district_id, 'name')
+                        $result = get_districts();
+                        while ($row = $result->fetch_assoc()) {
+                            $district = $row["name"];
+                            echo '<option value=" ' . $district . '"  >' . $district . '</option>';
+                        }
+
                         ?>
                     </select>
 

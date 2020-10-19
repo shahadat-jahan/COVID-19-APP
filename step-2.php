@@ -11,12 +11,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         $score = 0;
     }
+    user_symptom($_SESSION["user_id"], $_POST["symptoms_id"]);
     $_SESSION['score'] = $_SESSION['score'] + $score;
     header('location: ' . $site_url . 'step-3.php');
     exit;
 }
 
 $symptoms = get_symptoms('step1');
+
 ?>
 
 <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">

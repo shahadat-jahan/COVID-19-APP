@@ -23,7 +23,7 @@ if (empty($_SESSION['admin_id'])) {
                     <a href="report-result.php" role="button">Reports by result</a>
                 </div>
                 <div class="box4">
-                    <a href="report-date.php" role="button">Reports by date</a>
+                    <a href="report-date-year.php" role="button">Reports by date</a>
                 </div>
                 <div class="box4">
                     <a href="report-zone.php" role="button">Reports by zone</a>

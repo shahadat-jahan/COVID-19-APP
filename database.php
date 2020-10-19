@@ -15,8 +15,15 @@ if ($conn->connect_error) {
 function save_user($name, $age, $sex, $temp, $house, $road, $thana, $district)
 {
     global $conn;
-
-    $sql = "INSERT INTO survey (name, age, sex, temp, house, road, thana, district)
+    $name = $conn->real_escape_string($name);
+    $age = $conn->real_escape_string($age);
+    $sex = $conn->real_escape_string($sex);
+    $temp = $conn->real_escape_string($temp);
+    $house = $conn->real_escape_string($house);
+    $road = $conn->real_escape_string($road);
+    $thana = $conn->real_escape_string($thana);
+    $district = $conn->real_escape_string($district);
+    echo  $sql = "INSERT INTO survey (name, age, sex, temp, house, road, thana, district)
        VALUE ('$name', '$age', '$sex', '$temp', '$house', '$road', '$thana', '$district')";
 
     if ($conn->query($sql) === TRUE) {
@@ -176,6 +183,19 @@ function get_total_affected($year)
     $conn->close();
 }
 
+function get_total_affected_by_date($year, $monthNum)
+{
+    global $conn;
+    $sql = "SELECT count(*) as total, day(date) as day, month(date) as month, year(date) as year FROM `survey` where year(date) = '$year' AND month(date) = '$monthNum' group by day ORDER BY day desc";
+    $result = $conn->query($sql);
+    if ($result->num_rows > 0) {
+        return $result;
+    } else {
+        return false;
+    }
+    $conn->close();
+}
+
 function total_affected_zone()
 {
     global $conn;
@@ -215,7 +235,7 @@ function get_districts()
     $conn->close();
 }
 
-function writeOptionList($table, $id, $fld)
+function writeOptionList($table, $fld)
 {
     global $conn;
     $sql = "SELECT * FROM $table ORDER BY $fld ASC";
@@ -232,6 +252,20 @@ function writeOptionList($table, $id, $fld)
             $selected = "";
         echo "<option $selected value='" . $a_row["id"] . "'>" . $a_row[$fld] . "</option>";
     }
+}
+
+function user_symptom($user_id, $symptoms_id)
+{
+    global $conn;
+    $sql = "INSERT INTO user_symptom (survey_id, symptoms_id)
+    VALUES ('$user_id','$symptoms_id')";
+
+    if ($conn->query($sql) === TRUE) {
+        return true;
+    } else {
+        return false;
+    }
+    $conn->close();
 }
 
 function login($name, $password)
