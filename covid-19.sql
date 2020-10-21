@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 07, 2020 at 11:20 PM
+-- Generation Time: Oct 21, 2020 at 12:02 PM
 -- Server version: 10.4.13-MariaDB
 -- PHP Version: 7.4.8
 
@@ -29,7 +29,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `district` (
   `id` int(2) NOT NULL,
-  `name` varchar(20) NOT NULL
+  `name` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -138,7 +138,12 @@ INSERT INTO `survey` (`id`, `name`, `age`, `sex`, `temp`, `house`, `road`, `than
 (9, 'Shahadat', 29, 'Male', 98.5, 'House-447/', 'shimultoli rd', '24 NO.', 'Gazipur', '2020-09-07 13:23:55', 3),
 (10, 'xyz', 30, 'Female', 101, '10', '5', '20', 'Dhaka', '2020-09-07 14:37:14', 6),
 (11, 'Mr.', 18, 'Female', 101, '15', '13', 'gazipur sador', 'Gazipur', '2020-09-07 14:39:43', 5),
-(12, 'Mr. x', 40, 'Female', 101, '10', '5', '20', 'Comilla', '2020-09-07 20:11:30', 12);
+(12, 'Mr. x', 40, 'Female', 101, '10', '5', '20', 'Comilla', '2020-09-07 20:11:30', 12),
+(13, 'abc', 22, 'Female', 102, '10', '5', '20', 'Brahmanbaria', '2020-09-09 19:35:31', 2),
+(14, 'sdgf', 12, 'Female', 97, '10', '13', '20', 'Comilla', '2020-09-09 19:38:05', 0),
+(15, 'Nafi', 5, 'Male', 97, '10', '13', '20', 'Gazipur', '2020-09-10 18:42:30', 0),
+(16, 'jahan', 28, 'Male', 98, 'House-447/', 'Shimultoli housing', '24 NO.', 'Gazipur', '2020-09-10 18:44:27', 11),
+(20, 'M', 21, 'Male', 101, '12', '21', '24', 'Cox\'s Bazar', '2020-10-17 20:12:44', 8);
 
 -- --------------------------------------------------------
 
@@ -202,6 +207,18 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `name`, `password`) VALUES
 (1, 'admin', '21232f297a57a5a743894a0e4a801fc3');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_symptom`
+--
+
+CREATE TABLE `user_symptom` (
+  `id` int(11) NOT NULL,
+  `survey_id` int(11) NOT NULL,
+  `symptoms_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 --
 -- Indexes for dumped tables
 --
@@ -238,6 +255,14 @@ ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `user_symptom`
+--
+ALTER TABLE `user_symptom`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `survey_id` (`survey_id`),
+  ADD KEY `symptoms_id` (`symptoms_id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -251,7 +276,7 @@ ALTER TABLE `district`
 -- AUTO_INCREMENT for table `survey`
 --
 ALTER TABLE `survey`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `symptoms`
@@ -272,6 +297,12 @@ ALTER TABLE `users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT for table `user_symptom`
+--
+ALTER TABLE `user_symptom`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
 -- Constraints for dumped tables
 --
 
@@ -280,6 +311,13 @@ ALTER TABLE `users`
 --
 ALTER TABLE `thana`
   ADD CONSTRAINT `thana_ibfk_1` FOREIGN KEY (`district_id`) REFERENCES `district` (`id`);
+
+--
+-- Constraints for table `user_symptom`
+--
+ALTER TABLE `user_symptom`
+  ADD CONSTRAINT `user_symptom_ibfk_1` FOREIGN KEY (`survey_id`) REFERENCES `survey` (`id`),
+  ADD CONSTRAINT `user_symptom_ibfk_2` FOREIGN KEY (`symptoms_id`) REFERENCES `symptoms` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
