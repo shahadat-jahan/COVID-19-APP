@@ -281,3 +281,20 @@ function login($name, $password)
     }
     $conn->close();
 }
+
+function DeleteUser($id)
+{
+    global $conn;
+
+    $sql = "DELETE FROM `survey` WHERE id=" . $id;
+
+    if ($conn->query($sql) === TRUE) {
+
+        header('location: ' . $site_url . 'result.php');
+
+        exit();
+    } else {
+        echo "User delete failed";
+    }
+    $conn->close();
+}

@@ -18,7 +18,7 @@ if (empty($_SESSION['admin_id'])) {
 
             echo '<div class="table-responsive"><h2>Assessment records</h2><table class="table" ><thead class="thead-dark"><tr><th scope="col">SI No.</th><th scope="col">Full Name</th>
             <th scope="col">Age</th><th>Sex</th><th scope="col">Temperature</th><th scope="col">Assessment Date</th>
-            <th scope="col">Assessment Score</th><th scope="col">COVID-19 Result</th></tr></thead><tbody>';
+            <th scope="col">Assessment Score</th><th scope="col">COVID-19 Result</th><th scope="col">Action</th></tr></thead><tbody>';
 
             while ($row = $result->fetch_assoc()) {
                 if ($row['score'] < 5) {
@@ -29,7 +29,8 @@ if (empty($_SESSION['admin_id'])) {
 
                 echo '<tr><th scope="row">' . $row['id'] . '</th><td>' . $row['name'] . '</td><td>' . $row['age'] . '</td><td>' . $row['sex'] . '</td>
             <td>' . $row['temp'] . '</td><td>' . $row['date'] . '</td><td>' . $row['score'] . '</td>
-            <td>' . $report . '</td></tr>';
+            <td>' . $report . '</td><td><a class="btn btn-primary btn2" onclick="return ConfirmDelete();" href="delete_user.php?id=' . $row['id'] . '" role="button">Delete</a></td>
+            </tr>';
             }
             echo '</tbody></table></div>';
             ?>
