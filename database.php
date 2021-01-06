@@ -3,7 +3,7 @@ session_start();
 $server = "localhost";
 $db_name = "covid-19";
 $db_user = "root";
-$db_pass = "";
+$db_pass = "123456";
 
 //create connection
 $conn = new mysqli($server, $db_user, $db_pass, $db_name);
