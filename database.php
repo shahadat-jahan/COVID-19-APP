@@ -23,7 +23,7 @@ function save_user($name, $age, $sex, $temp, $house, $road, $thana, $district)
     $road = $conn->real_escape_string($road);
     $thana = $conn->real_escape_string($thana);
     $district = $conn->real_escape_string($district);
-    echo  $sql = "INSERT INTO survey (name, age, sex, temp, house, road, thana, district)
+    $sql = "INSERT INTO survey ( name, age, sex, temp, house, road, thana, district)
        VALUE ('$name', '$age', '$sex', '$temp', '$house', '$road', '$thana', '$district')";
 
     if ($conn->query($sql) === TRUE) {
