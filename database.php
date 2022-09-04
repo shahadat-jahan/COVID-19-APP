@@ -3,7 +3,7 @@ session_start();
 $server = "localhost";
 $db_name = "covid-19";
 $db_user = "root";
-$db_pass = "123456";
+$db_pass = "";
 
 //create connection
 $conn = new mysqli($server, $db_user, $db_pass, $db_name);
@@ -226,6 +226,19 @@ function get_districts()
 {
     global $conn;
     $sql = "SELECT * FROM district ORDER BY name ASC ";
+    $result = $conn->query($sql);
+    if ($result->num_rows > 0) {
+        return $result;
+    } else {
+        return false;
+    }
+    $conn->close();
+}
+
+function get_years()
+{
+    global $conn;
+    $sql = "SELECT year(date) as year FROM `survey` group by year ORDER BY year desc";
     $result = $conn->query($sql);
     if ($result->num_rows > 0) {
         return $result;

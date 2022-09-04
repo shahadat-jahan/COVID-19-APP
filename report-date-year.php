@@ -26,8 +26,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <form class="form-inline" action="report-date-year.php" method="post">
 
                     <select name="year" class="custom-select form-control mb-2 mr-sm-2">
+                        <?php
+                        $years = get_years();
+                        foreach ($years as $row) {
+                        ?>
+                            <option value="<?php echo  $row['year'];?>" <?php if ($year == $row['year']) echo "selected"; ?>><?php echo  $row['year'];?></option>
+                        <?php
+                        }
+                        ?>
+                        <!-- <option value="2022" <?php if ($year == 2022) echo "selected"; ?>>2022</option>
+                        <option value="2021" <?php if ($year == 2021) echo "selected"; ?>>2021</option>
                         <option value="2020" <?php if ($year == 2020) echo "selected"; ?>>2020</option>
-                        <option value="2019" <?php if ($year == 2019) echo "selected"; ?>>2019</option>
+                        <option value="2019" <?php if ($year == 2019) echo "selected"; ?>>2019</option> -->
                     </select>
 
                     <button type="submit" class="btn btn-primary mb-2">Generate report</button>
